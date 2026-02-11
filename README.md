@@ -183,11 +183,6 @@ This project successfully implemented the method of steepest descent to fit an e
 
 ---
 
-## AI Tool Disclosure
-
-I used AI tools (ChatGPT/Claude) to help structure the report format, check mathematical notation formatting, and suggest alternative phrasing for some explanations. All mathematical derivations, algorithm implementation, data collection, analysis, and interpretation are my own work. The core optimization code and results are original.
-
----
 
 ## Appendix: Submitted Files
 - `exp_fit_67_pageviews_sd.m` - MATLAB implementation
