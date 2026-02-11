@@ -2,8 +2,8 @@
 
 **Author:** Joey Zhang  
 **Date:** February 11, 2026  
-**GitHub:** [github.com/joeyzhang-dev](https://github.com/joeyzhang-dev)  
-**LinkedIn:** [linkedin.com/in/joeyzhangdev](https://www.linkedin.com/in/joeyzhangdev/)
+**GitHub:** [project repo](https://github.com/joeyzhang-dev/67-meme-steepest-descent)  
+**LinkedIn:** [my profile](https://www.linkedin.com/in/joeyzhangdev/)
 
 ---
 
