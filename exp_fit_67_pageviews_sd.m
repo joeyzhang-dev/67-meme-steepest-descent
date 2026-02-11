@@ -88,11 +88,9 @@ fprintf('========================================\n');
 fprintf('Stopping when ||x_new - x|| < %.1e\n', tol);
 fprintf('Max iterations: %d\n\n', maxIter);
 
-% Initialize x
-% I'll use the normal equations solution as starting point
-% x = (B^T*B)^(-1) * B^T * b
-% (this should actually be optimal already but let's run SD anyway)
-x = (B' * B) \ (B' * b);
+% Initialize x with a naive starting point
+% Using a simple guess: ln(A) ≈ ln(mean(y)), and a ≈ 0
+x = [log(mean(y_fit)); 0];
 
 fprintf('Starting point x0:\n');
 fprintf('  x(1) = ln(A) = %.6f\n', x(1));
@@ -113,24 +111,12 @@ while iter < maxIter
     d = -g;    % steepest descent direction
     
     % Step 3: find optimal step size (exact line search)
-    % For quadratic f(x) = 0.5*||Bx-b||^2, there's a formula!
-    % Minimize f(x - alpha*g) over alpha > 0
-    %
-    % Taking derivative and setting = 0:
-    % d/dalpha [0.5*||B(x - alpha*g) - b||^2] = 0
-    %
-    % Working through the math:
-    % = d/dalpha [0.5*(Bx - alpha*Bg - b)^T*(Bx - alpha*Bg - b)]
-    % = (Bx - alpha*Bg - b)^T * (-Bg)
-    % = -(Bx - b)^T*Bg + alpha*(Bg)^T*Bg
-    % = -g^T*g + alpha*||Bg||^2  (since g = B^T*(Bx-b))
-    %
-    % Set = 0 and solve:  alpha = (g^T*g) / ||Bg||^2
-    %
-    % This is equation 8.2 from the textbook!
+    % For quadratic f(x) = 0.5*||Bx-b||^2, minimize f(x - alpha*g)
+    % Take derivative w.r.t. alpha and set to 0:
+    % Result: alpha = (g'*g) / ||Bg||^2  (equation 8.2 from textbook)
     
     Bg = B * g;
-    alpha = (g' * g) / (Bg' * Bg);  % exact formula for quadratics
+    alpha = (g' * g) / (Bg' * Bg);
     
     % Step 4: update x
     x_new = x + alpha * d;  % move in direction d with step size alpha
